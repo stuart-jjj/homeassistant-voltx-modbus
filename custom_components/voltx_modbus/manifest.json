@@ -1,0 +1,10 @@
+{
+  "domain": "voltx_modbus",
+  "name": "Voltx Modbus",
+  "version": "1.0.0",
+  "config_flow": true,
+  "documentation": "https://github.com/stuart-jjj/homeassistant-voltx-modbus",
+  "requirements": ["pyModbusTCP==0.3.0"],
+  "iot_class": "local_polling",
+  "codeowners": []
+}

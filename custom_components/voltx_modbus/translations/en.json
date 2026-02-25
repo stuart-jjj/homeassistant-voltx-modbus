@@ -1,0 +1,49 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Voltx Inverter",
+        "description": "Enter the Modbus TCP connection details for your Voltx inverter. Each inverter is identified by its host, port and slave ID — you can add multiple inverters by running this flow again.",
+        "data": {
+          "host": "Host / IP address",
+          "port": "Port",
+          "slave_id": "Slave ID"
+        },
+        "data_description": {
+          "host": "The IP address or hostname of the inverter (e.g. 192.168.1.100).",
+          "port": "Modbus TCP port (default: 502).",
+          "slave_id": "Modbus slave / unit ID (typically 1 or 3)."
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure Voltx Inverter",
+        "description": "Update the connection details for this inverter.",
+        "data": {
+          "host": "Host / IP address",
+          "port": "Port",
+          "slave_id": "Slave ID"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to the inverter. Check the host, port and slave ID, then try again."
+    },
+    "abort": {
+      "already_configured": "An inverter with the same host, port and slave ID is already configured.",
+      "reconfigure_successful": "Configuration updated successfully."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Voltx Modbus options",
+        "data": {
+          "scan_interval": "Polling interval (seconds)"
+        },
+        "data_description": {
+          "scan_interval": "How often to read registers from the inverter (5 – 3600 s). Default: 30 s."
+        }
+      }
+    }
+  }
+}

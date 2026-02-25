@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "[devcontainer] Running bootstrap..."
+
+mkdir -p /mnt/supervisor/homeassistant/custom_components
+
+if [[ -n "${WORKSPACE_DIRECTORY:-}" && -d "${WORKSPACE_DIRECTORY}" ]]; then
+  git config --global --add safe.directory "${WORKSPACE_DIRECTORY}" || true
+fi
+
+# Set the Docker daemon logging driver to json-file.
+# The devcontainer image defaults to journald, which fails when systemd-journald
+# is not available, causing 'journald is not enabled on this host' errors.
+sudo mkdir -p /etc/docker
+echo '{"log-driver": "json-file"}' | sudo tee /etc/docker/daemon.json > /dev/null
+echo "[devcontainer] Set Docker log driver to json-file."
+
+# Initialise the supervised HA environment so that supervisor_run works correctly.
+if command -v supervisor_bootstrap >/dev/null 2>&1; then
+  echo "[devcontainer] Running supervisor_bootstrap..."
+  # Ensure the script is executable (the image may ship it without +x).
+  sudo chmod +x "$(command -v supervisor_bootstrap)" 2>/dev/null || true
+  supervisor_bootstrap
+else
+  echo "[devcontainer] supervisor_bootstrap not found, skipping."
+fi
+
+echo "[devcontainer] Bootstrap complete."
