@@ -2,10 +2,10 @@
 
 ## What it does
 
-This integration supports a modbusTCP connection to a Solplanet/Voltx inverter and battery. It does not expose all the entities of other integrations, just enough to control the inverter and battery for automated charge/discharge with power setpoint. You would still need another integration to see information such as grid and PV meter values.
+This integration supports a modbus RTU over TCP connection to a Solplanet/Voltx inverter and battery using a suitable modbus gateway device. It exposes a handful of entities, enough to monitor and control the inverter and battery for automated charge/discharge with power setpoint.
 
 ## Features
-- Supports single-phase inverters
+- Supports the single-phase inverter ASW010K-SH by Solplanet only so far
 - Supports min 5s refresh times
 - Sensors for inverter and battery
 - Battery mode control
