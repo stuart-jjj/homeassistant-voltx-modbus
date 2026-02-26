@@ -8,9 +8,6 @@ Priorities identified after scanning session on 25 February 2026.
 
 ### 1. Identify input 1632–1633 (doc 31633–31634)
 
-~~The active-power scan found an unidentified s32 ≈ 2448 W immediately after the battery
-block.~~
-
 **INVESTIGATED — 2026-02-25. Not a power register.**
 
 Three-condition cross-check (grid import / solar export / oven on + high battery discharge):
@@ -27,11 +24,10 @@ power register.
 **Exhaustive scan completed 2026-02-25:** individual-register sweep of input 1290–1310,
 1380–1410, 1400–1559, 1560–1605, 1629–1659 — all returned zero/0xFFFF outside known blocks.
 
-**Why grid/load power is missing from the Modbus TCP map:** Grid import/export and
+**Why grid/load power is missing from the Modbus map:** Grid import/export and
 per-circuit readings in the Solplanet app come from CT clamps reporting via the proprietary cloud protocol
-(`getdefine.cgi`). These are not surfaced as Modbus registers.
-
-**This item is closed.** No grid or load power sensor can be added via Modbus TCP.
+(`getdefine.cgi`). These are not surfaced as Modbus registers. Seems like no grid or load power sensor can 
+be added via Modbus TCP.
 
 ---
 
@@ -95,7 +91,7 @@ are enabled at their defaults. Mostly read-only diagnostic interest.
 
 ### 8. RS485 access
 
-The MB001 spec documents many registers that do not respond over Modbus TCP — comms
+The spec documents many registers that do not respond over Modbus TCP — comms
 settings (40201+), grid protection thresholds (40501+), full firmware version block
 (41210+). These are possibly accessible via another RS485 port on the inverter, e.g.
 the meter port. Could try to re-run the scans there. Currently the Modbus access is
