@@ -1,10 +1,10 @@
-# Modbus TCP Implementation Guide
+# Modbus Implementation Notes
 
 ## Overview
 
-Notes on the direct Modbus TCP register map for the **Solplanet/Voltx ASW010K-SH** inverter with battery storage,
-discovered by scanning the device (slave ID 3) and cross-referenced against the official **AISWEI Modbus specification**
-(MB001_ASW GEN-Modbus-en_V2.1.5).
+For the curious... notes on the direct Modbus register map for the **Solplanet/Voltx ASW010K-SH** inverter with 
+battery storage, discovered by scanning the device (slave ID 3) and cross-referenced against the **AISWEI Modbus 
+specification** V2.1.5.
 
 **Address convention:**
 
@@ -17,7 +17,7 @@ discovered by scanning the device (slave ID 3) and cross-referenced against the 
 
 | Parameter | Value       |
 | --------- | ----------- |
-| Protocol  | Modbus TCP  |
+| Protocol  | Modbus RTU  |
 | Host      | xx.xx.xx.xx |
 | Port      | 502         |
 | Slave ID  | 3           |
@@ -114,7 +114,7 @@ These are not exposed as HA entities.
 
 | Registers | Content          | Decoded example               |
 | --------- | ---------------- | ----------------------------- |
-| 1182–1189 | Serial number    | `AL010K1234567890`            |
+| 1182–1189 | Serial number    | `AL010K9999999999`            |
 | 1198–1202 | Model name       | `ASW010K-SH`                  |
 | 1209+     | Firmware version | `V610-…`                      |
 | --------- | ---------------- | ----------------------------- |
