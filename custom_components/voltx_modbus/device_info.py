@@ -15,18 +15,29 @@ from .const import CONF_SLAVE_ID, DOMAIN
 
 # Keys produced by the coordinator that belong to the Battery device.
 # Everything else goes to the Inverter device.
-BATTERY_KEYS: frozenset[str] = frozenset({
-    # Live battery measurements
-    "pb", "vb", "cb", "tb",
-    "soc", "soh",
-    "cli", "clo",
-    "bst", "bcomm",
-    "e_chg_today", "e_dis_today",
-    # Charge/discharge command & status (Custom mode control)
-    "chflg", "chpwr",
-    # Battery limit settings
-    "soc_max", "soc_min",
-})
+BATTERY_KEYS: frozenset[str] = frozenset(
+    {
+        # Live battery measurements
+        "pb",
+        "vb",
+        "cb",
+        "tb",
+        "soc",
+        "soh",
+        "cli",
+        "clo",
+        "bst",
+        "bcomm",
+        "e_chg_today",
+        "e_dis_today",
+        # Charge/discharge command & status (Custom mode control)
+        "chflg",
+        "chpwr",
+        # Battery limit settings
+        "soc_max",
+        "soc_min",
+    }
+)
 
 
 def inverter_device_info(entry: ConfigEntry) -> DeviceInfo:

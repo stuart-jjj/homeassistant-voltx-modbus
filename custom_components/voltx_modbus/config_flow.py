@@ -38,16 +38,10 @@ def _user_schema(defaults: dict[str, Any] | None = None) -> vol.Schema:
                 selector.TextSelectorConfig(type=selector.TextSelectorType.TEXT)
             ),
             vol.Required(CONF_PORT, default=d.get(CONF_PORT, DEFAULT_PORT)): selector.NumberSelector(
-                selector.NumberSelectorConfig(
-                    min=1, max=65535, mode=selector.NumberSelectorMode.BOX
-                )
+                selector.NumberSelectorConfig(min=1, max=65535, mode=selector.NumberSelectorMode.BOX)
             ),
-            vol.Required(
-                CONF_SLAVE_ID, default=d.get(CONF_SLAVE_ID, DEFAULT_SLAVE_ID)
-            ): selector.NumberSelector(
-                selector.NumberSelectorConfig(
-                    min=1, max=247, mode=selector.NumberSelectorMode.BOX
-                )
+            vol.Required(CONF_SLAVE_ID, default=d.get(CONF_SLAVE_ID, DEFAULT_SLAVE_ID)): selector.NumberSelector(
+                selector.NumberSelectorConfig(min=1, max=247, mode=selector.NumberSelectorMode.BOX)
             ),
         }
     )
@@ -62,9 +56,7 @@ def _options_schema(defaults: dict[str, Any] | None = None) -> vol.Schema:
                 CONF_SCAN_INTERVAL,
                 default=d.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL),
             ): selector.NumberSelector(
-                selector.NumberSelectorConfig(
-                    min=5, max=3600, step=5, mode=selector.NumberSelectorMode.SLIDER
-                )
+                selector.NumberSelectorConfig(min=5, max=3600, step=5, mode=selector.NumberSelectorMode.SLIDER)
             ),
         }
     )

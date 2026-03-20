@@ -103,9 +103,7 @@ class VoltxSelectEntity(
         self.entity_description = description
         self._attr_unique_id = f"{entry.unique_id}_{description.key}"
         self._attr_options = list(description.options)
-        self._reverse_map: dict[str, int] = {
-            label: raw for raw, label in description.options_map.items()
-        }
+        self._reverse_map: dict[str, int] = {label: raw for raw, label in description.options_map.items()}
         self._attr_device_info = get_device_info(entry, description.key)
 
     @property
@@ -132,6 +130,4 @@ class VoltxSelectEntity(
         raw = self._reverse_map.get(option)
         if raw is None:
             return
-        await self.coordinator.async_write_register(
-            self.entity_description.register, raw
-        )
+        await self.coordinator.async_write_register(self.entity_description.register, raw)

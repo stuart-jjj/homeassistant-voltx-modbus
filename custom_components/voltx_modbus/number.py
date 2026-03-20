@@ -144,6 +144,4 @@ class VoltxNumberEntity(
     async def async_set_native_value(self, value: float) -> None:
         """Write the new value to the inverter via FC06."""
         raw = int(round(value * self.entity_description.raw_scale))
-        await self.coordinator.async_write_register(
-            self.entity_description.register, raw
-        )
+        await self.coordinator.async_write_register(self.entity_description.register, raw)

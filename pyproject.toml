@@ -1,0 +1,38 @@
+[tool.ruff]
+line-length = 125
+
+[tool.ruff.lint]
+# PLC0415: import-not-at-top-level — pyModbusTCP is intentionally imported
+# inside executor methods to avoid loading it on the HA event loop thread.
+ignore = ["PLC0415"]
+
+[tool.pylint.format]
+max-line-length = 125
+
+[tool.pylint.messages_control]
+disable = [
+    # C0415: import-outside-toplevel — pyModbusTCP intentionally imported
+    # inside executor methods; see ruff note above.
+    "C0415",
+    # E1123: unexpected-keyword-arg — false positives on HA @dataclass entity
+    # descriptions; Pylint can't resolve dataclass-generated __init__ signatures.
+    "unexpected-keyword-arg",
+    # W0223: abstract-method — HA entities implement async_select_option /
+    # async_set_native_value; Pylint only sees the sync abstract stub.
+    "abstract-method",
+    # W0613: unused-argument — hass is a required HA platform setup signature.
+    "unused-argument",
+    # R0913/R0917: too-many-arguments — coordinator __init__ requires all
+    # connection params; splitting them would obscure intent.
+    "too-many-arguments",
+    "too-many-positional-arguments",
+    # R0915: too-many-statements — _fetch_data is a single sequential Modbus
+    # read; splitting it across helper methods adds no clarity.
+    "too-many-statements",
+    # W0718: broad-exception-caught — config flow connection validation
+    # intentionally catches all exceptions to surface a clean UI error.
+    "broad-exception-caught",
+    # R0801: duplicate-code — entity __init__/available/native_value boilerplate
+    # is idiomatic HA structure shared across platform modules.
+    "duplicate-code",
+]
