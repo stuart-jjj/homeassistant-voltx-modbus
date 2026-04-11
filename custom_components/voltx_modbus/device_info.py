@@ -8,10 +8,9 @@ Defines two HA devices per config entry:
 from __future__ import annotations
 
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_HOST
 from homeassistant.helpers.device_registry import DeviceInfo
 
-from .const import CONF_SLAVE_ID, DOMAIN
+from .const import DOMAIN
 
 # Keys produced by the coordinator that belong to the Battery device.
 # Everything else goes to the Inverter device.
@@ -43,11 +42,9 @@ BATTERY_KEYS: frozenset[str] = frozenset(
 def inverter_device_info(entry: ConfigEntry) -> DeviceInfo:
     """Return DeviceInfo for the inverter device."""
     uid = entry.unique_id or entry.entry_id
-    host = entry.data[CONF_HOST]
-    slave = entry.data[CONF_SLAVE_ID]
     return DeviceInfo(
         identifiers={(DOMAIN, uid)},
-        name=f"Voltx Inverter ({host} slave {slave})",
+        name="Voltx Inverter",
         manufacturer="Voltx",
         model="Hybrid Inverter",
     )
@@ -56,11 +53,9 @@ def inverter_device_info(entry: ConfigEntry) -> DeviceInfo:
 def battery_device_info(entry: ConfigEntry) -> DeviceInfo:
     """Return DeviceInfo for the battery device, linked to the inverter."""
     uid = entry.unique_id or entry.entry_id
-    host = entry.data[CONF_HOST]
-    slave = entry.data[CONF_SLAVE_ID]
     return DeviceInfo(
         identifiers={(DOMAIN, f"{uid}_battery")},
-        name=f"Voltx Battery ({host} slave {slave})",
+        name="Voltx Battery",
         manufacturer="Voltx",
         model="Battery Storage",
         via_device=(DOMAIN, uid),
